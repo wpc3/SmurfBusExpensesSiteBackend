@@ -30,7 +30,7 @@ private ExpensesRepository expensesRepository;
         return expensesRepository.findById(expenseId).orElseThrow(() -> new RuntimeException("expense not found"));
   }
 
-    public List<Expenses> retrieveMultipleExpenses(List<Expenses> expenses){
+    public List<Expenses> retrieveMultipleExpenses(){
         return (List<Expenses>) expensesRepository.findAll();
     }
 

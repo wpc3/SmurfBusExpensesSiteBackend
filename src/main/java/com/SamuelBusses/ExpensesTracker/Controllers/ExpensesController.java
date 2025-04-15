@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class ExpensesController {
@@ -23,6 +23,18 @@ public class ExpensesController {
     public ResponseEntity<Expenses> postAnExpense(@RequestBody Expenses expense){
 
         return new ResponseEntity<>(expensesService.createAnExpense(expense), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/expense/{expenseId}")
+    public ResponseEntity<Expenses> getExpensebyId(@PathVariable Long expenseId){
+
+        return new ResponseEntity<>(expensesService.retrieveExpensesById(expenseId), HttpStatus.OK);
+    }
+
+    @GetMapping("/expenses")
+    public ResponseEntity<List<Expenses>> getAllExpenses(){
+
+        return new ResponseEntity<>(expensesService.retrieveMultipleExpenses(), HttpStatus.OK);
     }
 
 
