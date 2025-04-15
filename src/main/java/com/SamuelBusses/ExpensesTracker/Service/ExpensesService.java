@@ -34,6 +34,26 @@ private ExpensesRepository expensesRepository;
         return (List<Expenses>) expensesRepository.findAll();
     }
 
+    public Expenses updateAnExpense(Expenses expenses, Long expenseId){
+
+        Expenses expenses1 = expensesRepository.findById(expenseId).orElseThrow(() -> new RuntimeException("expense not found"));
+        expenses1.setCategory(expenses.getCategory());
+        expenses1.setCost(expenses.getCost());
+        expenses1.setDescription(expenses.getDescription());
+        expenses1.setMonth(expenses.getMonth());
+
+        return expenses1;
+    }
+
+    public void removeAnExpense(Long expenseId){
+
+        Expenses expenses = expensesRepository.findById(expenseId).orElseThrow(() -> new RuntimeException("expense not found"));
+
+        expensesRepository.delete(expenses);
+
+        System.out.println(expenses + "Has been deleted");
+    }
+
 
 
 
