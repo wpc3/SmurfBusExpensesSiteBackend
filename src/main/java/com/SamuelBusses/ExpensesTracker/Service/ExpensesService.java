@@ -41,6 +41,7 @@ private ExpensesRepository expensesRepository;
         expenses1.setCost(expenses.getCost());
         expenses1.setDescription(expenses.getDescription());
         expenses1.setMonth(expenses.getMonth());
+        expenses1.setYear(expenses.getYear());
 
         return expenses1;
     }
@@ -51,7 +52,7 @@ private ExpensesRepository expensesRepository;
 
         expensesRepository.delete(expenses);
 
-        System.out.println(expenses + "Has been deleted");
+        System.out.println("Expenses has been deleted.");
     }
 
 

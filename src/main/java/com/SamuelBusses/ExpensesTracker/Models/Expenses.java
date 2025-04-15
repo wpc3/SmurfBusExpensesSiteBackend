@@ -15,14 +15,16 @@ private Long expenseId;
 private String category;
 private Double cost;
 private String description;
-private String month;
+private int month;
+private int year;
 
-    public Expenses(Long expenseId, String category, Double cost, String description, String month) {
+    public Expenses(Long expenseId, String category, Double cost, String description, int month, int year) {
         this.expenseId = expenseId;
         this.category = category;
         this.cost = cost;
         this.description = description;
         this.month = month;
+        this.year = year;
     }
 
     public Expenses(){}
@@ -59,11 +61,19 @@ private String month;
         this.description = description;
     }
 
-    public String getMonth() {
+    public int getMonth() {
         return month;
     }
 
-    public void setMonth(String month) {
+    public void setMonth(int month) {
         this.month = month;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
     }
 }
