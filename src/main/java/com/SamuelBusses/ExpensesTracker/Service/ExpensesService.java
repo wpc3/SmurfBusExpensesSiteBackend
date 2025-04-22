@@ -43,7 +43,7 @@ private ExpensesRepository expensesRepository;
         expenses1.setMonth(expenses.getMonth());
         expenses1.setYear(expenses.getYear());
 
-        return expenses1;
+        return expensesRepository.save(expenses1);
     }
 
     public void removeAnExpense(Long expenseId){
