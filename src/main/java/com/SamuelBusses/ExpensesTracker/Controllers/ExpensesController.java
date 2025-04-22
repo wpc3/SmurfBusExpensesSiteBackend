@@ -25,6 +25,12 @@ public class ExpensesController {
         return new ResponseEntity<>(expensesService.createAnExpense(expense), HttpStatus.CREATED);
     }
 
+    @PostMapping("/expenses")
+    public ResponseEntity<List<Expenses>> postMultipleExpenses(@RequestBody List<Expenses> expenses){
+
+        return new ResponseEntity<>(expensesService.createMultipleExpenses(expenses), HttpStatus.CREATED);
+    }
+
     @GetMapping("/expense/{expenseId}")
     public ResponseEntity<Expenses> getExpensebyId(@PathVariable Long expenseId){
 
@@ -35,6 +41,14 @@ public class ExpensesController {
     public ResponseEntity<List<Expenses>> getAllExpenses(){
 
         return new ResponseEntity<>(expensesService.retrieveMultipleExpenses(), HttpStatus.OK);
+    }
+
+    @PutMapping("/expense/{expenseId}")
+    public ResponseEntity<Expenses> editAnExpense(@PathVariable Long expenseId,
+                                                  @RequestBody Expenses expense){
+
+        Expenses expenses = expensesService.updateAnExpense(expense,expenseId);
+        return ResponseEntity.ok(expenses) ;
     }
 
 
