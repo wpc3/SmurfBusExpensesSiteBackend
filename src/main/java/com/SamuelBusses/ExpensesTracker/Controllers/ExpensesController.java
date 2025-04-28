@@ -1,5 +1,6 @@
 package com.SamuelBusses.ExpensesTracker.Controllers;
 
+import com.SamuelBusses.ExpensesTracker.CustomQueryInterfaces.CostOfExpenseByDate;
 import com.SamuelBusses.ExpensesTracker.Models.Expenses;
 import com.SamuelBusses.ExpensesTracker.Service.ExpensesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,12 +44,34 @@ public class ExpensesController {
         return new ResponseEntity<>(expensesService.retrieveMultipleExpenses(), HttpStatus.OK);
     }
 
+    @GetMapping("/expenses/{month}/{year}")
+    public ResponseEntity<List<CostOfExpenseByDate>> getExpenseByMonthYear(@PathVariable int month, @PathVariable int year){
+
+        System.out.println("Received month: " + month + ", year: " + year);
+
+        return new ResponseEntity<>(expensesService.retrieveExpensesByMonthAndYear(month,year), HttpStatus.OK);
+    }
+
+    @GetMapping("/expenses/{year}")
+    public ResponseEntity<List<CostOfExpenseByDate>> getExpensesByYear(@PathVariable int year){
+
+        return new ResponseEntity<>(expensesService.retrieveExpensesByYear(year),HttpStatus.OK);
+    }
+
     @PutMapping("/expense/{expenseId}")
     public ResponseEntity<Expenses> editAnExpense(@PathVariable Long expenseId,
                                                   @RequestBody Expenses expense){
 
         Expenses expenses = expensesService.updateAnExpense(expense,expenseId);
         return ResponseEntity.ok(expenses) ;
+    }
+
+    @DeleteMapping("/expense/{expenseId}")
+    public ResponseEntity<Void> deleteAnExpense(@PathVariable Long expenseId){
+
+        expensesService.removeAnExpense(expenseId);
+
+        return ResponseEntity.noContent().build();
     }
 
 

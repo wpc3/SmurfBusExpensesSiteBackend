@@ -1,5 +1,6 @@
 package com.SamuelBusses.ExpensesTracker.Service;
 
+import com.SamuelBusses.ExpensesTracker.CustomQueryInterfaces.CostOfExpenseByDate;
 import com.SamuelBusses.ExpensesTracker.Models.Expenses;
 import com.SamuelBusses.ExpensesTracker.Repositories.ExpensesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +53,18 @@ private ExpensesRepository expensesRepository;
 
         expensesRepository.delete(expenses);
 
-        System.out.println("Expenses has been deleted.");
+        System.out.println("Expense id  " + expenseId + " has been deleted.");
+    }
+
+    public List<CostOfExpenseByDate> retrieveExpensesByMonthAndYear(int month, int year){
+
+        return expensesRepository.findSumOfExpensesByMonthAndYear(month,year);
+    }
+
+
+    public List<CostOfExpenseByDate> retrieveExpensesByYear(int year){
+
+        return expensesRepository.findSumOfExpensesByYear(year);
     }
 
 

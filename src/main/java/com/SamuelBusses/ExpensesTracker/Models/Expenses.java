@@ -5,6 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import java.util.Locale;
+
 @Entity
 public class Expenses {
 
@@ -38,7 +40,7 @@ private int year;
     }
 
     public String getCategory() {
-        return category;
+        return category.toLowerCase();
     }
 
     public void setCategory(String category) {
