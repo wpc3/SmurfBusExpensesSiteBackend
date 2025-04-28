@@ -68,7 +68,10 @@ private ExpensesRepository expensesRepository;
     }
 
 
+    public List<Expenses> retrieveExpensesByCategory(String category){
 
+        return expensesRepository.findExpensesByCategory(category);
+    }
 
 
 }

@@ -17,4 +17,7 @@ List<CostOfExpenseByDate> findSumOfExpensesByMonthAndYear(int month, int year);
 @Query(value = "SELECT category, SUM(cost) AS totalCost FROM expenses WHERE year = ?1 GROUP BY category", nativeQuery = true)
 List<CostOfExpenseByDate> findSumOfExpensesByYear(int year);
 
+@Query(value = "SELECT * FROM expenses WHERE category = ?", nativeQuery = true)
+ List<Expenses> findExpensesByCategory(String category);
+
 }

@@ -58,6 +58,12 @@ public class ExpensesController {
         return new ResponseEntity<>(expensesService.retrieveExpensesByYear(year),HttpStatus.OK);
     }
 
+    @GetMapping("/expenses/category/{category}")
+    public ResponseEntity<List<Expenses>> getExpensesByCategory(@PathVariable String category){
+
+        return new ResponseEntity<>(expensesService.retrieveExpensesByCategory(category), HttpStatus.OK);
+    }
+
     @PutMapping("/expense/{expenseId}")
     public ResponseEntity<Expenses> editAnExpense(@PathVariable Long expenseId,
                                                   @RequestBody Expenses expense){
