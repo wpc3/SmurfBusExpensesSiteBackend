@@ -73,5 +73,9 @@ private ExpensesRepository expensesRepository;
         return expensesRepository.findExpensesByCategory(category);
     }
 
+    public List<String> retrieveCategories(){
+        return expensesRepository.findAllCategories();
+    }
+
 
 }
