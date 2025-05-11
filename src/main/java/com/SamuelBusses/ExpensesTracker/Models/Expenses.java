@@ -11,7 +11,7 @@ import java.util.Locale;
 public class Expenses {
 
 @Id
-@GeneratedValue(strategy = GenerationType.AUTO)
+@GeneratedValue(strategy =  GenerationType.IDENTITY)
 private Long expenseId;
 
 private String category;
