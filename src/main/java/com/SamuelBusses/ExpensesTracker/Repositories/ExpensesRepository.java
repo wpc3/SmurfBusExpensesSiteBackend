@@ -20,4 +20,7 @@ List<CostOfExpenseByDate> findSumOfExpensesByYear(int year);
 @Query(value = "SELECT * FROM expenses WHERE category = ?", nativeQuery = true)
  List<Expenses> findExpensesByCategory(String category);
 
+@Query(value = "SELECT DISTINCT e.category FROM expenses e;" , nativeQuery = true)
+ List<String> findAllCategories();
+
 }

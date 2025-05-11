@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 @RestController
 public class ExpensesController {
@@ -61,6 +62,25 @@ public class ExpensesController {
     public ResponseEntity<List<Expenses>> getExpensesByCategory(@PathVariable String category){
 
         return new ResponseEntity<>(expensesService.retrieveExpensesByCategory(category), HttpStatus.OK);
+    }
+
+    @GetMapping("/expenses/categories")
+    public ResponseEntity<List<String>> getAllCategories(){
+        try {
+            List<String> categories = expensesService.retrieveCategories();
+            if (categories.isEmpty()) {
+                return ResponseEntity.noContent().build(); // Return 204 No Content if no categories found
+            }
+            return ResponseEntity.ok(categories); // Return 200 OK with categories in the body
+        } catch (Exception e) {
+            // Log the error
+            System.out.println("Error fetching categories: " + e.getMessage());
+            e.printStackTrace(); // Log the full stack trace for debugging
+
+            // Return 500 Internal Server Error with a custom error message
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Collections.singletonList("Error fetching categories"));
+        }
     }
 
     @PutMapping("/expense/{expenseId}")
