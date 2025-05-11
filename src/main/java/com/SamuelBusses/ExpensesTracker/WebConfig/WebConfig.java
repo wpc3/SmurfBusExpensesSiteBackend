@@ -15,9 +15,11 @@ public class WebConfig {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
                         .allowedOrigins("http://localhost:3000")
+                        .allowedOrigins("https://smurfbusexpensesfrontend.onrender.com")
                         .allowedMethods("*")
                         .allowedHeaders("*");
             }
         };
+
     }
 }
