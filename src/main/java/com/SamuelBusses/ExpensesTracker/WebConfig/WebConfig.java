@@ -14,8 +14,7 @@ public class WebConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:3000")
-                        .allowedOrigins("https://smurfbusexpensesfrontend.onrender.com")
+                        .allowedOrigins("https://smurfbusexpensesfrontend.onrender.com", "http://localhost:3000" )
                         .allowedMethods("*")
                         .allowedHeaders("*");
             }
