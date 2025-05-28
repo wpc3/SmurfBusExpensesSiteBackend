@@ -1,9 +1,6 @@
 package com.SamuelBusses.ExpensesTracker.Models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Locale;
 
@@ -13,6 +10,10 @@ public class Expenses {
 @Id
 @GeneratedValue(strategy =  GenerationType.IDENTITY)
 private Long expenseId;
+
+@ManyToOne
+@JoinColumn(name = "accountId")
+private Account account;
 
 private String category;
 private Double cost;
@@ -77,5 +78,13 @@ private int year;
 
     public void setYear(int year) {
         this.year = year;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 }
