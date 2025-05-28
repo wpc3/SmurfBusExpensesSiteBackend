@@ -13,6 +13,7 @@ public class Account {
     private Long id;
 
     private String password;
+    private String username;
 
     @OneToMany(mappedBy = "account")
     private Set<Expenses> expenses = new HashSet<>();
@@ -20,9 +21,10 @@ public class Account {
 
     public Account(){}
 
-    public Account(Long id, String password) {
+    public Account(Long id, String password, String username) {
         this.id = id;
         this.password = password;
+        this.username = username;
     }
 
     public Long getId() {
@@ -41,6 +43,14 @@ public class Account {
         this.password = password;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public Set<Expenses> getExpenses() {
         return expenses;
     }
@@ -48,4 +58,6 @@ public class Account {
     public void setExpenses(Set<Expenses> expenses) {
         this.expenses = expenses;
     }
+
+
 }
