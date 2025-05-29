@@ -1,5 +1,6 @@
 package com.SamuelBusses.ExpensesTracker.Service;
 
+import com.SamuelBusses.ExpensesTracker.Exceptions.UnauthorizedException;
 import com.SamuelBusses.ExpensesTracker.Models.Account;
 import com.SamuelBusses.ExpensesTracker.Repositories.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,28 @@ public class AccountService {
 
         return accountRepository.save(account);
     }
+
+    public Account userLogin(Account account) {
+
+        String username = account.getUsername();
+        String password = account.getPassword();
+
+        if (username == null || password == null) {
+
+            throw new IllegalArgumentException("Username must not be blank.");
+        }
+
+        return accountRepository.findByUsername(username)
+                .filter(acc -> acc.getPassword().equals(password))
+                .orElseThrow(() -> new UnauthorizedException("Invalid username or password"));
+
+
+    }
+
+
+
+
+
 
 
 
