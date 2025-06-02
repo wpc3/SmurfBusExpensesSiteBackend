@@ -1,7 +1,41 @@
 package com.SamuelBusses.ExpensesTracker.Controllers;
 
+import com.SamuelBusses.ExpensesTracker.Exceptions.UnauthorizedException;
+import com.SamuelBusses.ExpensesTracker.Models.Account;
+import com.SamuelBusses.ExpensesTracker.Service.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class AccountController {
+
+    private AccountService accountService;
+
+    public AccountController(@Autowired AccountService accountService) {
+        this.accountService = accountService;
+    }
+
+    @PostMapping("/account")
+    public ResponseEntity<Account> postAccount(@RequestBody Account account){
+
+        return new ResponseEntity<>(accountService.createAnAccount(account), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<Account> postLogin(@RequestBody Account account){
+        try {
+            Account loggedInAccount = accountService.userLogin(account);
+            return ResponseEntity.ok(loggedInAccount);
+        } catch (UnauthorizedException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+
 }
