@@ -1,7 +1,9 @@
 package com.SamuelBusses.ExpensesTracker.Service;
 
 import com.SamuelBusses.ExpensesTracker.CustomQueryInterfaces.CostOfExpenseByDate;
+import com.SamuelBusses.ExpensesTracker.Models.Account;
 import com.SamuelBusses.ExpensesTracker.Models.Expenses;
+import com.SamuelBusses.ExpensesTracker.Repositories.AccountRepository;
 import com.SamuelBusses.ExpensesTracker.Repositories.ExpensesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,9 +14,11 @@ import java.util.List;
 public class ExpensesService {
 
 private ExpensesRepository expensesRepository;
+private AccountRepository accountRepository;
 
-    public ExpensesService(@Autowired ExpensesRepository expensesRepository) {
+    public ExpensesService(@Autowired ExpensesRepository expensesRepository, @Autowired AccountRepository accountRepository) {
         this.expensesRepository = expensesRepository;
+        this.accountRepository = accountRepository;
     }
 
   public Expenses createAnExpense(Expenses expense){
@@ -75,6 +79,15 @@ private ExpensesRepository expensesRepository;
 
     public List<String> retrieveCategories(){
         return expensesRepository.findAllCategories();
+    }
+
+    public Expenses addAccountToExpense(Long accountId, Expenses expenses){
+
+        Account account = accountRepository.findById(accountId).orElseThrow(() -> new RuntimeException("account id does not exist"));
+        expenses.setAccount(account);
+
+        return expensesRepository.save(expenses);
+
     }
 
 

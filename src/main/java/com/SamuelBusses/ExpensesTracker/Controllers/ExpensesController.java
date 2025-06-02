@@ -32,6 +32,12 @@ public class ExpensesController {
         return new ResponseEntity<>(expensesService.createMultipleExpenses(expenses), HttpStatus.CREATED);
     }
 
+    @PostMapping("/{accountId}/expense")
+    public ResponseEntity<Expenses> postExpenseWithAnAccount(@PathVariable Long accountId, @RequestBody Expenses expenses){
+
+        return new ResponseEntity<>(expensesService.addAccountToExpense(accountId, expenses), HttpStatus.CREATED);
+    }
+
     @GetMapping("/expense/{expenseId}")
     public ResponseEntity<Expenses> getExpensebyId(@PathVariable Long expenseId){
 

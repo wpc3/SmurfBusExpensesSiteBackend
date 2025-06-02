@@ -2,10 +2,12 @@ package com.SamuelBusses.ExpensesTracker.Controllers;
 
 import com.SamuelBusses.ExpensesTracker.Exceptions.UnauthorizedException;
 import com.SamuelBusses.ExpensesTracker.Models.Account;
+import com.SamuelBusses.ExpensesTracker.Models.Expenses;
 import com.SamuelBusses.ExpensesTracker.Service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,6 +38,18 @@ public class AccountController {
             return ResponseEntity.badRequest().build();
         }
     }
+
+    @PostMapping("/{accountId}/expenses")
+    public ResponseEntity<Account> postExpense(@PathVariable Long accountId, @RequestBody Expenses expenses){
+
+        return new ResponseEntity<>(accountService.saveAnExpenseToAccount(accountId,expenses), HttpStatus.OK);
+
+
+    }
+
+
+
+
 
 
 }
