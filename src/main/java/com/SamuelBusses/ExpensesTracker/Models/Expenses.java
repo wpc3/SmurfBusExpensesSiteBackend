@@ -1,5 +1,6 @@
 package com.SamuelBusses.ExpensesTracker.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Locale;
@@ -12,6 +13,7 @@ public class Expenses {
 private Long expenseId;
 
 @ManyToOne
+@JsonIgnore
 @JoinColumn(name = "accountId")
 private Account account;
 
