@@ -72,6 +72,18 @@ public class AccountService {
         return accountRepository.save(account);
     }
 
+    public Account updateAnAccount(long accountId, Account account){
+
+        Account accountToUpdate = accountRepository.findById(accountId).orElseThrow(() -> new RuntimeException("account id does not exist"));
+
+        accountToUpdate.setExpenses(account.getExpenses());
+        accountToUpdate.setUsername(account.getUsername());
+        accountToUpdate.setPassword(account.getPassword());
+
+
+        return accountRepository.save(accountToUpdate);
+    }
+
 
 
 
