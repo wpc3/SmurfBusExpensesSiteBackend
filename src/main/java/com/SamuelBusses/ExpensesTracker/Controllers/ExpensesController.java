@@ -58,6 +58,14 @@ public class ExpensesController {
         return new ResponseEntity<>(expensesService.retrieveExpensesByMonthAndYear(month,year), HttpStatus.OK);
     }
 
+    @GetMapping("/expenses/account/{month}/{year}/{accountId}")
+    public ResponseEntity<List<CostOfExpenseByDate>> getExpenseByMonthYearAndAccount(@PathVariable int month, @PathVariable int year, @PathVariable long accountId){
+
+        System.out.println("Received month: " + month + ", year: " + year + "Account" + accountId);
+
+        return new ResponseEntity<>(expensesService.retrieveExpensesByMonthAndYearAndAccount(month,year,accountId), HttpStatus.OK);
+    }
+
     @GetMapping("/expenses/{year}")
     public ResponseEntity<List<CostOfExpenseByDate>> getExpensesByYear(@PathVariable int year){
 
