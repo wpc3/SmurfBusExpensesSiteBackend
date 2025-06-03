@@ -50,6 +50,12 @@ public class ExpensesController {
         return new ResponseEntity<>(expensesService.retrieveMultipleExpenses(), HttpStatus.OK);
     }
 
+    @GetMapping("/expenses/account/{accountId}")
+    public ResponseEntity<List<Expenses>> getAllExpenses(@PathVariable long accountId){
+
+        return new ResponseEntity<>(expensesService.retrieveMultipleExpensesByAccount(accountId), HttpStatus.OK);
+    }
+
     @GetMapping("/expenses/{month}/{year}")
     public ResponseEntity<List<CostOfExpenseByDate>> getExpenseByMonthYear(@PathVariable int month, @PathVariable int year){
 

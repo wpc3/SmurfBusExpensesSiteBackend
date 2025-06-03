@@ -39,6 +39,11 @@ private AccountRepository accountRepository;
         return (List<Expenses>) expensesRepository.findAll();
     }
 
+    public List<Expenses> retrieveMultipleExpensesByAccount(long accountId){
+        return (List<Expenses>) expensesRepository.findAllExpensesByAccountId(accountId);
+    }
+
+
     public Expenses updateAnExpense(Expenses expenses, Long expenseId){
 
         Expenses expenses1 = expensesRepository.findById(expenseId).orElseThrow(() -> new RuntimeException("expense not found"));
