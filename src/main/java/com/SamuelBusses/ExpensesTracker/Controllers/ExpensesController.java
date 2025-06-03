@@ -84,20 +84,45 @@ public class ExpensesController {
         return new ResponseEntity<>(expensesService.retrieveExpensesByCategory(category), HttpStatus.OK);
     }
 
+    @GetMapping("/expenses/category/account/{category}/{accountId}")
+    public ResponseEntity<List<Expenses>> getExpensesByCategoryByAccount(@PathVariable String category, @PathVariable long accountId){
+
+        return new ResponseEntity<>(expensesService.retrieveExpensesByCategoryByAccount(category,accountId), HttpStatus.OK);
+    }
+
     @GetMapping("/expenses/categories")
     public ResponseEntity<List<String>> getAllCategories(){
         try {
             List<String> categories = expensesService.retrieveCategories();
             if (categories.isEmpty()) {
-                return ResponseEntity.noContent().build(); // Return 204 No Content if no categories found
+                return ResponseEntity.noContent().build();
             }
-            return ResponseEntity.ok(categories); // Return 200 OK with categories in the body
+            return ResponseEntity.ok(categories);
         } catch (Exception e) {
-            // Log the error
+
             System.out.println("Error fetching categories: " + e.getMessage());
             e.printStackTrace(); // Log the full stack trace for debugging
 
-            // Return 500 Internal Server Error with a custom error message
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Collections.singletonList("Error fetching categories"));
+        }
+    }
+
+    @GetMapping("/expenses/account/categories/{accountId}")
+    public ResponseEntity<List<String>> getAllCategoriesByAccount(@PathVariable long accountId){
+        try {
+            List<String> categories = expensesService.retrieveCategoriesbyAccount(accountId);
+            if (categories.isEmpty()) {
+                return ResponseEntity.noContent().build();
+            }
+            return ResponseEntity.ok(categories);
+        } catch (Exception e) {
+
+            System.out.println("Error fetching categories: " + e.getMessage());
+            e.printStackTrace(); // Log the full stack trace for debugging
+
+
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(Collections.singletonList("Error fetching categories"));
         }

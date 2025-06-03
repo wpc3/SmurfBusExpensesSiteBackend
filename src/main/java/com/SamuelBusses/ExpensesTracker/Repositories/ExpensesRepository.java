@@ -26,7 +26,13 @@ List<CostOfExpenseByDate> findSumOfExpensesByYear(int year);
 @Query(value = "SELECT * FROM expenses WHERE category = ?", nativeQuery = true)
  List<Expenses> findExpensesByCategory(String category);
 
+ @Query(value = "SELECT * FROM expenses WHERE category = ?1 AND account_id = ?2", nativeQuery = true)
+ List<Expenses> findExpensesByCategoryAndAccount(String category, long accountId);
+
 @Query(value = "SELECT DISTINCT e.category FROM expenses e;" , nativeQuery = true)
  List<String> findAllCategories();
+
+ @Query(value = "SELECT DISTINCT e.category FROM expenses e WHERE e.account_id = ?1;" , nativeQuery = true)
+ List<String> findAllCategoriesByAccount(long accountId);
 
 }
