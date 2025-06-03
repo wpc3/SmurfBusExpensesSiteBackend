@@ -47,6 +47,7 @@ private AccountRepository accountRepository;
         expenses1.setDescription(expenses.getDescription());
         expenses1.setMonth(expenses.getMonth());
         expenses1.setYear(expenses.getYear());
+        expenses1.setAccount(expenses.getAccount());
 
         return expensesRepository.save(expenses1);
     }
@@ -65,6 +66,11 @@ private AccountRepository accountRepository;
         return expensesRepository.findSumOfExpensesByMonthAndYear(month,year);
     }
 
+    public List<CostOfExpenseByDate> retrieveExpensesByYearByAccount(int year, long accountId){
+
+        return expensesRepository.findSumOfExpensesByYearByAccount(year,accountId);
+    }
+
 
     public List<CostOfExpenseByDate> retrieveExpensesByYear(int year){
 
@@ -76,6 +82,7 @@ private AccountRepository accountRepository;
 
         return expensesRepository.findExpensesByCategory(category);
     }
+
 
     public List<String> retrieveCategories(){
         return expensesRepository.findAllCategories();
