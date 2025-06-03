@@ -88,9 +88,18 @@ private AccountRepository accountRepository;
         return expensesRepository.findExpensesByCategory(category);
     }
 
+    public List<Expenses> retrieveExpensesByCategoryByAccount(String category, long accountId){
+
+        return expensesRepository.findExpensesByCategoryAndAccount(category, accountId);
+    }
+
 
     public List<String> retrieveCategories(){
         return expensesRepository.findAllCategories();
+    }
+
+    public List<String> retrieveCategoriesbyAccount(long accountId){
+        return expensesRepository.findAllCategoriesByAccount(accountId);
     }
 
     public Expenses addAccountToExpense(Long accountId, Expenses expenses){
