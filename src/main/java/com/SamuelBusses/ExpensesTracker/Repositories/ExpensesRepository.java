@@ -14,6 +14,9 @@ public interface ExpensesRepository extends CrudRepository <Expenses, Long> {
 @Query(value = "SELECT category, SUM(cost) AS totalCost FROM expenses WHERE month = ?1 AND year = ?2 GROUP BY category", nativeQuery = true )
 List<CostOfExpenseByDate> findSumOfExpensesByMonthAndYear(int month, int year);
 
+ @Query(value = "SELECT category, SUM(cost) AS totalCost FROM expenses WHERE month = ?1 AND year = ?2 AND account_id = ?3 GROUP BY category", nativeQuery = true )
+ List<CostOfExpenseByDate> findSumOfExpensesByMonthAndYearAndAccount(int month, int year, long accountId);
+
 @Query(value = "SELECT category, SUM(cost) AS totalCost FROM expenses WHERE year = ?1 GROUP BY category", nativeQuery = true)
 List<CostOfExpenseByDate> findSumOfExpensesByYear(int year);
 
