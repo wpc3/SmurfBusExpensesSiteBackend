@@ -66,6 +66,11 @@ private AccountRepository accountRepository;
         return expensesRepository.findSumOfExpensesByMonthAndYear(month,year);
     }
 
+    public List<CostOfExpenseByDate> retrieveExpensesByMonthAndYearAndAccount(int month, int year, long accountId){
+
+        return expensesRepository.findSumOfExpensesByMonthAndYearAndAccount(month,year,accountId);
+    }
+
     public List<CostOfExpenseByDate> retrieveExpensesByYearByAccount(int year, long accountId){
 
         return expensesRepository.findSumOfExpensesByYearByAccount(year,accountId);
