@@ -116,5 +116,14 @@ private AccountRepository accountRepository;
 
     }
 
+    public List<Expenses> addMultipleExpensesToAccount(List<Expenses> expenses, Long accountId){
+        Account account = accountRepository.findById(accountId).orElseThrow(() -> new RuntimeException("account id does not exist"));
+
+        for(Expenses expenses1: expenses){
+            expenses1.setAccount(account);
+        }
+
+        return (List<Expenses>) expensesRepository.saveAll(expenses);
+    }
 
 }
