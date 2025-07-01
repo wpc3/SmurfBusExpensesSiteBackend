@@ -18,6 +18,7 @@ public class AccountController {
         this.accountService = accountService;
     }
 
+
     @PostMapping("/account")
     public ResponseEntity<Account> postAccount(@RequestBody Account account){
 
